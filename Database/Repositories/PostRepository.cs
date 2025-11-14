@@ -12,12 +12,21 @@ namespace BlogApi.Database.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Post>> GetAllAsync()
+        public async Task<IEnumerable<Post>> GetAllAsync(string? term)
         {
-            return await _context.Posts.ToListAsync();
+
+            if (string.IsNullOrEmpty(term))
+            {
+                return await _context.Posts.ToListAsync();
+            }
+            else
+            {
+                return await _context.Posts.Where(p => p.Category == term || p.Content == term || p.Title == term).ToListAsync();
+            }
+               
         }
 
-        public async Task<Post> GetAsync(int id)
+        public async Task<Post?> GetAsync(int id)
         {
             return await _context.Posts.FindAsync(id);
         }
@@ -27,15 +36,34 @@ namespace BlogApi.Database.Repositories
             await _context.SaveChangesAsync();
             return post;
         }
-        public async Task UpdateAsync(Post post)
+        public async Task<Post?> UpdateAsync(int id, Post post)
         {
-            _context.Posts.Update(post);
+            var p = await _context.Posts.FindAsync(id);
+
+            if(p == null)
+            {
+                return null;
+            }
+
+            p.Title = post.Title;
+            p.Content  = post.Content;
+            p.Category = post.Category;
+            p.Tags = post.Tags;
+            p.UpdatedAt = DateOnly.FromDateTime(DateTime.Now);
+            
             await _context.SaveChangesAsync();
+            return p;
         }
-        public async Task DeleteAsync(Post post)
+        public async Task<bool> DeleteAsync(int id)
         {
-            _context.Posts.Remove(post);
+            var post = await _context.Posts.FindAsync(id);
+            if(post == null)
+            {
+                return false;
+            }
+            _context.Posts.Remove(post);    
             await _context.SaveChangesAsync();
+            return true;
         }
     }
 }
