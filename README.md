@@ -21,21 +21,42 @@ Para usar la aplicacion, seguir los siuientes pasos:
 		cd BlogApi
 
 3. Abrir en IDE de preferencia.
-4. Configurar ConnectionStrings en appsettings.json.
+4. Configurar ConnectionStrings a su servidro en appsettings.json.
 
 		"ConnectionStrings": {
-        "DefaultConnection": "Server=AUGUSTO\\SQLEXPRESS;Database=BlogApi;Trusted_Connection=True;TrustServerCertificate=True"
+        "DefaultConnection": "Server=ServerName;Database=DbName;Trusted_Connection=True;TrustServerCertificate=True"
         },
    
-5. Ejecutar las migraciones
+5. Ejecutar las migraciones de EF Core correspondientes asegurandose de tener las herramientas instaladas.
 
+#GET /api/post
 
+   	Obtiene todos los posts.
 
-#Uso
-1. POST
+#GET /api/post/{id}
+
+   	Obtiene el post con ese id.
+
+#GET /api/post?term=tech
+
+   	Obtiene todos los post con ese termino de busqueda en su titulo, descripcion o categoria.
+
+#POST /api/post
+
    	{
 	  "title": "My First Blog Post",
 	  "content": "This is the content of my first blog post.",
 	  "category": "Technology",
 	  "tags": ["Tech", "Programming"]
 	}
+
+#PUT /api/post/{id}
+
+   	{
+	  "title": "My First Blog Post Edited",
+	  "content": "This is the edited content of my first blog post.",
+	  "category": "Technology edited",
+	  "tags": ["Tech edited", "Programming edited"]
+	}
+
+#DELETE /api/post/{id}
