@@ -1,5 +1,5 @@
-Es una aplicacion de consola manejada por comandos que ayudara a organizarte tareas.
-URL de la pagina del proyecto: https://roadmap.sh/projects/task-tracker
+Es una simple API RESTful con las operaciones basicas de CRUD para una plataforma de blog personal.
+URL de la pagina del proyecto: https://roadmap.sh/projects/blogging-platform-api
 
 # Requisitos
 
