@@ -32,4 +32,10 @@ Para usar la aplicacion, seguir los siuientes pasos:
 
 
 #Uso
-
+1. POST
+   	{
+	  "title": "My First Blog Post",
+	  "content": "This is the content of my first blog post.",
+	  "category": "Technology",
+	  "tags": ["Tech", "Programming"]
+	}
